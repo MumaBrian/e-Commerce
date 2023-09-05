@@ -7,6 +7,7 @@ const notFoundMiddleware=require('./middleware/not-found')
 const errorHandlerMiddleware = require('./middleware/error-handler')
 const morgan=require('morgan')
 const authRouter=require('./routes/authRoutes')
+const userRouter = require('./routes/userRoutes')
 const cookieParser=require('cookie-parser')
 
 
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
     console.log(req.signedCookies)
 })
 app.use('/auth',authRouter)
+app.use('/users', userRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
