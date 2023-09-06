@@ -6,14 +6,16 @@ const {
     updateUser,
     updateUserAndPassword
 } = require('../controllers/userController')
+const { authenticateUser, authorizePermissions }  =require('../middleware/authentication')
+
 
 const router = express.Router()
 
-router.route('/').get(getAllUsers), 
+router.route('/').get(authenticateUser,authorizePermissions,getAllUsers), 
 router.route('/show').get(showCurrentUser),
-router.route('/update-user').post(updateUser)
-router.route('/update-user-password').post(updateUserAndPassword)
-router.route('/:id').get(getSingleUser)
+router.route('/update-user').patch(updateUser)
+router.route('/update-user-password').patch(updateUserAndPassword)
+router.route('/:id').get(authenticateUser,getSingleUser)
 
 
 module.exports = router
