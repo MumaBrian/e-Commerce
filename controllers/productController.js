@@ -46,7 +46,7 @@ const deleteProduct = async (req, res) => {
     if (!product) {
         throw new CustomError.NotFoundError(`No product with id ${productId}`)
     }
-    await product.delete()
+    await product.remove()
     res.status(StatusCodes.OK).json({ msg:'Product removed successfully' })    
 
 }
